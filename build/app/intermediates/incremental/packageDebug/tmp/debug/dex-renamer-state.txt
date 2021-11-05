@@ -1,4 +1,0 @@
-#Thu Nov 04 20:40:14 MST 2021
-base.0=/home/Azielongas/Documents/Flutter/fast_home/build/app/intermediates/dex/debug/mergeDexDebug/classes.dex
-renamed.0=classes.dex
-path.0=classes.dex
