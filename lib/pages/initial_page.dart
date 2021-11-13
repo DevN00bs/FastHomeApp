@@ -6,8 +6,6 @@ import 'package:flutter/material.dart';
 
 class InitialPage extends StatelessWidget {
   var bgcolor = Colors.white;
-  final ButtonStyle styleInit = ElevatedButton.styleFrom(
-    textStyle: const TextStyle(fontSize: 18));
 
   final blueCustom = Color.fromARGB(100, 51, 91, 103);
   // This widget is the root of your application.
@@ -20,7 +18,7 @@ class InitialPage extends StatelessWidget {
         body: SafeArea(
           child: Container(
           decoration: BoxDecoration(
-            color: const Color(0x15FFF3B0)
+            //color: const Color(0x15FFF3B0)
           ),
           child: PageView(
             children: [
@@ -39,7 +37,8 @@ class InitialPage extends StatelessWidget {
                 Expanded(
                   child: Text(
                     '\n\nWelcome',
-                    style: TextStyle(fontSize: 32, height: .5),
+                    style: TextStyle(fontSize: 32, height: .5, fontWeight: FontWeight.w600, color: Color(0xFF335C67)),
+                    
                     )
                 ),
                 Expanded(
@@ -64,7 +63,11 @@ class InitialPage extends StatelessWidget {
                         (Route<dynamic> route) => false,
                         );
                       }, 
-                    style: styleInit,
+                    //filled
+                    style: ButtonStyle(
+                      backgroundColor: MaterialStateProperty.all(Color(0xFF335C67)),
+                      textStyle: MaterialStateProperty.all(TextStyle(fontSize: 19))
+                    ),
                     child: Text('Log In'),
                     )
                     ),
@@ -81,7 +84,6 @@ class InitialPage extends StatelessWidget {
                     ),
                   Expanded(
                     child: OutlinedButton(
-                      style: styleInit,
                       onPressed: () { 
                       print('Sign Up');
                       /*
@@ -97,6 +99,11 @@ class InitialPage extends StatelessWidget {
                         (Route<dynamic> route) => false,
                         );
                       }, 
+                    //outlined
+                    style: ButtonStyle(
+                      foregroundColor: MaterialStateProperty.all(Color(0xFF335C67)),
+                      textStyle: MaterialStateProperty.all(TextStyle(fontSize: 19, color: Color(0xFF335C67)))
+                    ),
                     child: Text('Sign up')
                     )
                     ),

@@ -24,7 +24,7 @@ class CustomNavigator extends StatelessWidget {
           onTap: ( int i ) => uiProvider.selectedMenuOpt = i,
           currentIndex: currentIndex,
           elevation: 0,
-          selectedItemColor: Colors.indigo[300],
+          selectedItemColor: Color(0xFF335C67),
           items: [
             BottomNavigationBarItem(
               icon: Icon( Icons.home ),

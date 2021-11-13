@@ -34,6 +34,7 @@ class _DetailScreenState extends State<DetailPage> {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
+      debugShowCheckedModeBanner: false,
       home: Scaffold(
           body: SingleChildScrollView(
         child: Column(children: <Widget>[

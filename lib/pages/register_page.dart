@@ -1,4 +1,6 @@
 import 'package:fast_home/pages/pages_page.dart';
+import 'package:fast_home/pages/login_page.dart';
+import 'package:fast_home/pages/register_page.dart';
 
 import 'package:flutter/material.dart';
 
@@ -34,7 +36,7 @@ class _RegisterPageState extends State<RegisterPage> {
                 child: TextField(
                   textAlign: TextAlign.center,
                   decoration: InputDecoration(
-                      hintText: "Enter your E-mail",
+                      hintText: "Enter a username",
                       border: OutlineInputBorder(
                           borderRadius:
                               BorderRadius.all(Radius.circular(8.0)))),
@@ -46,7 +48,7 @@ class _RegisterPageState extends State<RegisterPage> {
                 child: TextField(
                   textAlign: TextAlign.center,
                   decoration: InputDecoration(
-                      hintText: "Confirm your E-mail",
+                      hintText: "Enter your E-mail",
                       border: OutlineInputBorder(
                           borderRadius:
                               BorderRadius.all(Radius.circular(8.0)))),
@@ -81,22 +83,40 @@ class _RegisterPageState extends State<RegisterPage> {
               Container(
                 height: 50,
                 width: 300,
+                /*
                 decoration: BoxDecoration(
                     color: Colors.redAccent,
                     borderRadius: BorderRadius.circular(10)),
+                */
                 child: TextButton(
+                  style: ButtonStyle(
+                      backgroundColor: MaterialStateProperty.all(Color(0xFF335C67)),
+                      textStyle: MaterialStateProperty.all(TextStyle(fontSize: 19)),
+                      shape: MaterialStateProperty.all<RoundedRectangleBorder>(
+                                RoundedRectangleBorder(
+                                borderRadius: BorderRadius.circular(25)
+                              )
+                          )
+                    ),
                   onPressed: () {
                       print('Signed up successfully');
-                      Navigator.pushAndRemoveUntil(
-                        context,
-                        MaterialPageRoute(builder: (context) => PagesPage()),
-                        (Route<dynamic> route) => false,
-                        );
+                      Navigator.pushReplacementNamed(context, 'pages_page');
                       }, 
                   child: const Text(
                     'Register',
                     style: TextStyle(color: Colors.white, fontSize: 20),
                   ),
+                ),
+                //already account
+              ),
+              TextButton(
+                onPressed: () {
+                  //FORGOT PASSWORD SCREEN HERE
+                  Navigator.pushReplacementNamed(context, 'login_page');
+                },
+                child: const Text(
+                  'Already an account? Log in',
+                  style: TextStyle(color: Color(0xFF335C67), fontSize: 15),
                 ),
               ),
             ],
