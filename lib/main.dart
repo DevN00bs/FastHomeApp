@@ -1,4 +1,5 @@
 import 'dart:ui';
+import 'package:fast_home/services/auth_service.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
@@ -23,6 +24,10 @@ class MyApp extends StatelessWidget {
           create: (_) =>
               new UiProvider(), //(_) when build context is not needed
         ),
+        ChangeNotifierProvider(
+          create: (_) =>
+              new AuthService(), //to know user status
+        ),
       ],
       child: MaterialApp(
           debugShowCheckedModeBanner: false,
@@ -46,6 +51,6 @@ class MyApp extends StatelessWidget {
 
 appTheme() {
   return ThemeData(
-    primaryColor: Colors.indigo[300],
+    primaryColor: Color(0xFF335C67),
   );
 }

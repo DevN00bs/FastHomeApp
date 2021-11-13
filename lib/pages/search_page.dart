@@ -8,252 +8,239 @@ import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
 import 'package:fast_home/services/uri_provider.dart';
 
-//Basic and basics stand for basic property info
-Future<List<Basic>> fetchBasic() async {
-  final response = await http
-      .get(Uri.parse('https://real-state-api.herokuapp.com/api/properties'));
-
-  if (response.statusCode == 200) {
-    // If the server did return a 200 OK response,
-    // then parse the JSON.
-    List<dynamic> decoded = json.decode(response.body);
-    return decoded.map((basic) => new Basic.fromJson(basic)).toList();
-  } else {
-    // If the server did not return a 200 OK response,
-    // then throw an exception.
-    throw Exception('Failed to load basic');
-  }
-}
-
-class BasicsList {
-  final List<Basic> basics;
-
-  BasicsList({
-    
-    required this.basics,
-
-  });
-
-  factory BasicsList.fromJson(List<dynamic> parsedJson) {
-
-    List<Basic> basics = [];
-    basics = parsedJson.map((i) => Basic.fromJson(i)).toList();
-
-    return new BasicsList(
-      basics: basics
-    );
-  }
-}
-
-class Basic{
-  
-  final String photoURL;
-  final String address;
-  final String username;
-/*
-  final double terrainHeight;
-  final double terrainWidth;
-  final double price;
-
-  final String currencySymbol;
-  final String currencyCode;
-
-  final int contractType;
-  final int bedroomAmount;
-
-  final double bathroomAmount; 
-
-  final int floorAmount;  
-  final int garageSize;
-*/
-
-  Basic({
-    required this.photoURL,
-    required this.address,
-    required this.username,
-/*
-    required this.terrainHeight,
-    required this.terrainWidth,
-    required this.price,
-
-    required this.currencySymbol,
-    required this.currencyCode,
-
-    required this.contractType,
-    required this.bedroomAmount,
-
-    required this.bathroomAmount,
-
-    required this.floorAmount,
-    required this.garageSize
-*/
-  });
-
-  factory Basic.fromJson(Map<String, dynamic> json){
-    return new Basic(
-      photoURL: json['photoURL'],
-      address: json['address'],
-      username: json['username'],
-/*
-      terrainHeight: json['terrainHeight'],
-      terrainWidth: json['terrainWidth'],
-      price: json['price'],
-
-      currencySymbol: json['currencySymbol'],
-      currencyCode: json['currencyCode'],
-
-      contractType: json['contractType'],
-      bedroomAmount: json['bedroomAmount'],
-      
-      bathroomAmount: json['bathroomAmount'],
-      floorAmount: json['floorAmount'],
-      garageSize: json['garageSize']
-*/
-    );
-  }
-
-}
-
+//sfulwidget
 class SearchPage extends StatefulWidget {
 
   @override
   _SearchPageState createState() => _SearchPageState();
 }
 
+//class instanced from sfulwidget
 class _SearchPageState extends State<SearchPage> {
-  late Future<List<Basic>>futureBasic;
 
-  @override
-  void initState() {
-    super.initState();
-    futureBasic =  fetchBasic();
-  }
+  //late Future<List<Basic>>futureBasic;
+  GlobalKey<ScaffoldState> _key = GlobalKey<ScaffoldState>();
 
+  List<String> _choices = [];
+  List<String> _choices2 = [];
+  List<String> _choices3 = [];
+  List<String> _choices4 = [];
+
+  Map searchMap = {
+    'Rooms': 1,
+    'Bathrooms': 1,
+    'Garage': 0,
+    'Floors': 0
+  };
+
+  int _hg = 15;
+
+  int _choiceIndex = 0;
+  int _choiceIndex2 = 0;
+  int _choiceIndex3 = 0;
+  int _choiceIndex4 = 0;
+
+  String cRooms = '0';
+  String cBathrooms = '1';
+  String cGarage = '2';
+  String cFloors = '3';
+  
+//build context
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-        body: Center(
-          child: FutureBuilder<List<Basic>>(
-            future: futureBasic,
-            initialData: [],
-            builder: (context, snapshot) {
-              if (snapshot.hasData) {
-                return ListView.builder(
-                  itemCount: snapshot.data!.length,
-                  itemBuilder: (context, index) {
-                    return Text(snapshot.data![index].address);
-                  });
-              } else if (snapshot.hasError) {
-                return Text('${snapshot.error}');
-              }
+      key: _key,
+      body: ListView(
+        children: [
+          Column(
+            children: [
+              Align(
+                alignment: Alignment.topLeft,
+                child: Text(' Rooms', style: TextStyle( fontSize: 18 ),),
+              ), 
+              _buildChoiceChips1( ['1', '2', '3', '4', '5+'], cRooms ),
 
-              // By default, show a loading spinner.
-              return const CircularProgressIndicator();
-            },
+              Align(
+                alignment: Alignment.topLeft,
+                child: Text(' Bathrooms', style: TextStyle( fontSize: 18 ),),
+              ), 
+              _buildChoiceChips2( ['1', '1.5', '2', '2.5', '3+'], cBathrooms),
+
+              Align(
+                alignment: Alignment.topLeft,
+                child: Text(' Garage', style: TextStyle( fontSize: 18 ),),
+              ), 
+              _buildChoiceChips3( ['0', '1', '2', '3+'], cGarage ),
+
+              Align(
+                alignment: Alignment.topLeft,
+                child: Text(' Floors', style: TextStyle( fontSize: 18 ),),
+              ), 
+              _buildChoiceChips4( ['1', '2', '3+'], cFloors ),
+              Container(
+                height: 40,
+                width: 330,
+                child: TextButton(
+                    style: ButtonStyle(
+                        backgroundColor: MaterialStateProperty.all(Colors.white),
+                        textStyle: MaterialStateProperty.all(TextStyle(fontSize: 18)),
+                        shape: MaterialStateProperty.all<RoundedRectangleBorder>(
+                                  RoundedRectangleBorder(
+                                  borderRadius: BorderRadius.circular(25),
+                                  side: BorderSide( color: Color(0xFF335C67) )
+                                )
+                            )
+                      ),
+                    onPressed: () {
+                        print(searchMap);
+                        
+                        }, 
+                    child: const Text(
+                      'Search',
+                      style: TextStyle(color: Color(0xFF335C67), fontSize: 20),
+                    ),
+                  ),
+              ),
+
+
+              ]
           ),
-        ),
+        ],
+      )
     );
   }
-}
-///////////////////////////////////////////////////
-/*
-class _dropCustom extends State<SearchPage>{
+  
+//widget of building the chips in the whole choice
+//Rooms
+ Widget _buildChoiceChips1( _choices, variant ) {
 
-  String? dropdownValue;
-  String? dropdownValue2;
-
-  @override
-  Widget build(BuildContext context) {
-    return Scaffold(
-      body: Container(
-        height: 630,
-        child: ListView(
-          padding: EdgeInsets.all(15),
-          children: [
-          Column(
-          children: [
-          
-          //drop1
-          Container(
-          padding: const EdgeInsets.all(15),
-          child: DropdownButton<String>(
-            value: dropdownValue,
-            //elevation: 5,
-            style: TextStyle(color: Colors.black),
-            
-            hint: Text(
-              "Select rooms",
-              style: TextStyle(
-                  color: Colors.black,
-                  fontSize: 16,
-                  fontWeight: FontWeight.w600),
+    return Container(
+      height: MediaQuery.of(context).size.height/_hg,
+      child: ListView.builder(
+        scrollDirection: Axis.horizontal,
+        itemCount: _choices.length,
+        itemBuilder: (BuildContext context, int index) {
+          return Column(
+            children: [
+              ChoiceChip(
+              label: Text(_choices[index]),
+              selected: _choiceIndex == index,
+              selectedColor: Colors.grey[300],
+              onSelected: (bool selected) {
+                setState(() {
+                  _choiceIndex = selected ? index : 0;
+                  searchMap['Rooms'] = _choiceIndex + 1;
+                });
+              },
+              backgroundColor: Colors.transparent,
+              shape: StadiumBorder(side: BorderSide(color: Colors.grey.shade500)),
+              labelStyle: TextStyle(color: Colors.grey.shade700, fontWeight: FontWeight.bold),
             ),
-
-            onChanged: (String? value) {
-              setState(() {
-                dropdownValue = value!;
-              });
-            },
-
-            items: <String>[
-              '1',
-              '2',
-              '3',
-              '4',
-              '5',
-              '6',
-            ].map<DropdownMenuItem<String>>((String value) {
-              return DropdownMenuItem<String>(
-                value: value,
-                child: Text(value),
-              );
-            }).toList(),
-
-          ),
-
-        ),
-
-        //drop2
-          Container(
-          padding: const EdgeInsets.all(15),
-          child: DropdownButton<String>(
-            value: dropdownValue2,
-            //elevation: 5,
-            style: TextStyle(color: Colors.black),
-            
-            hint: Text(
-              "Select floors",
-              style: TextStyle(
-                  color: Colors.black,
-                  fontSize: 16,
-                  fontWeight: FontWeight.w600),
-            ),
-
-            onChanged: (String? value) {
-              setState(() {
-                dropdownValue2 = value!;
-              });
-            },
-
-            items: <String>[
-              '1',
-              '2'
-            ].map<DropdownMenuItem<String>>((String value) {
-              return DropdownMenuItem<String>(
-                value: value,
-                child: Text(value),
-              );
-            }).toList(),
-
-          ),
-
-        ),
-        ],
-        ),
-
-        
-        ],
-        ),
+            ]
+          );
+        },
       ),
     );
-  }*/
+  }
+//Bathrooms
+ Widget _buildChoiceChips2( _choices2, variant ) {
+
+    return Container(
+      height: MediaQuery.of(context).size.height/_hg,
+      child: ListView.builder(
+        scrollDirection: Axis.horizontal,
+        itemCount: _choices2.length,
+        itemBuilder: (BuildContext context, int index) {
+          return Column(
+            children: [
+              ChoiceChip(
+              label: Text(_choices2[index]),
+              selected: _choiceIndex2 == index,
+              selectedColor: Colors.grey[300],
+              onSelected: (bool selected) {
+                setState(() {
+                  _choiceIndex2 = selected ? index : 0;
+                  searchMap['Bathrooms'] = _choiceIndex2 + 1;
+                });
+              },
+              backgroundColor: Colors.transparent,
+              shape: StadiumBorder(side: BorderSide(color: Colors.grey.shade500)),
+              labelStyle: TextStyle(color: Colors.grey.shade700, fontWeight: FontWeight.bold),
+            ),
+            ]
+          );
+        },
+      ),
+    );
+  }
+//Garage
+ Widget _buildChoiceChips3( _choices3, variant ) {
+
+    return Container(
+      height: MediaQuery.of(context).size.height/_hg,
+      child: ListView.builder(
+        scrollDirection: Axis.horizontal,
+        itemCount: _choices3.length,
+        itemBuilder: (BuildContext context, int index) {
+          return Column(
+            children: [
+              ChoiceChip(
+              label: Text(_choices3[index]),
+              selected: _choiceIndex3 == index,
+              selectedColor: Colors.grey[300],
+              onSelected: (bool selected) {
+                setState(() {
+                  _choiceIndex3 = selected ? index : 0;
+                  searchMap['Garage'] = _choiceIndex3 + 1;
+                });
+              },
+              backgroundColor: Colors.transparent,
+              shape: StadiumBorder(side: BorderSide(color: Colors.grey.shade500)),
+              labelStyle: TextStyle(color: Colors.grey.shade700, fontWeight: FontWeight.bold),
+            ),
+            ]
+          );
+        },
+      ),
+    );
+  }
+//Floors
+ Widget _buildChoiceChips4( _choices4, variant ) {
+
+    return Container(
+      height: MediaQuery.of(context).size.height/_hg,
+      child: ListView.builder(
+        scrollDirection: Axis.horizontal,
+        itemCount: _choices4.length,
+        itemBuilder: (BuildContext context, int index) {
+          return Column(
+            children: [
+              ChoiceChip(
+              label: Text(_choices4[index]),
+              selected: _choiceIndex4 == index,
+              selectedColor: Colors.grey[300],
+              onSelected: (bool selected) {
+                setState(() {
+                  _choiceIndex4 = selected ? index : 0;
+                  searchMap['Floors'] = _choiceIndex4 + 1;
+                });
+              },
+              backgroundColor: Colors.transparent,
+              shape: StadiumBorder(side: BorderSide(color: Colors.grey.shade500)),
+              labelStyle: TextStyle(color: Colors.grey.shade700, fontWeight: FontWeight.bold),
+            ),
+            ]
+          );
+        },
+      ),
+    );
+  }
+
+}
+
+
+//idk yet but works
+class CompanyWidget {
+  const CompanyWidget(this.name);
+  final String name;
+}
