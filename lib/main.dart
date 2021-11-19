@@ -14,7 +14,7 @@ import 'package:fast_home/pages/login_page.dart';
 import 'package:fast_home/pages/register_page.dart';
 
 void main() => runApp(MyApp());
-//git main test
+
 class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
