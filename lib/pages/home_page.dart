@@ -13,7 +13,7 @@ class HomePage extends StatelessWidget {
     return Scaffold(
         body: Center(
           child: FutureBuilder<List<Basic>>(//giving a future; removing future makes it snapshot
-            future: new BasicProperty().fetchBasic(),
+            future: new BasicProperty().fetchBasic(""), // Agrega comillas aquí porque no queremos pasar un query
             initialData: [],
             builder: (context, snapshot) {
               if (snapshot.hasData) {

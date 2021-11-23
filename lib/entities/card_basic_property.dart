@@ -1,4 +1,5 @@
 import 'package:fast_home/entities/basic_property.dart';
+import 'package:fast_home/entities/detail_property.dart';
 import 'package:fast_home/pages/detail_page.dart';
 import 'package:flutter/material.dart';
 
@@ -12,9 +13,11 @@ class PropertyCard extends StatelessWidget {
     return GestureDetector(
       onTap: () {
         print('Test');
-        Navigator.push(context,
-        MaterialPageRoute(builder: (context) => DetailPage()));
-                },
+        Navigator.push(
+            context,
+            MaterialPageRoute(
+                builder: (context) => DetailPage(propId: data.propertyId)));
+      },
       child: Card(
         margin: EdgeInsets.symmetric(vertical: 8, horizontal: 16),
         child: Row(
@@ -42,7 +45,9 @@ class PropertyCard extends StatelessWidget {
                           Text(
                             data.address,
                             style: TextStyle(
-                                fontSize: 22, fontWeight: FontWeight.w500, color: Color(0xFF335C67)),
+                                fontSize: 22,
+                                fontWeight: FontWeight.w500,
+                                color: Color(0xFF335C67)),
                           ),
                           Text(data.currencySymbol +
                               data.price.toString() +
@@ -53,14 +58,20 @@ class PropertyCard extends StatelessWidget {
                       Row(
                         crossAxisAlignment: CrossAxisAlignment.center,
                         children: [
-                          Icon(Icons.person_outline, color: Color(0xFF9E2A2B),),
+                          Icon(
+                            Icons.person_outline,
+                            color: Color(0xFF9E2A2B),
+                          ),
                           Text(data.username),
                         ],
                       ),
                       Row(
                         crossAxisAlignment: CrossAxisAlignment.center,
                         children: [
-                          Icon(Icons.square_foot_outlined, color: Color(0xFF9E2A2B),),
+                          Icon(
+                            Icons.square_foot_outlined,
+                            color: Color(0xFF9E2A2B),
+                          ),
                           Text(data.terrainHeight.toString() +
                               " x " +
                               data.terrainWidth.toString() +
@@ -73,20 +84,32 @@ class PropertyCard extends StatelessWidget {
                         children: [
                           Column(
                             children: [
-                              Icon(Icons.bed_outlined, color: Color(0xFF9E2A2B),),
+                              Icon(
+                                Icons.bed_outlined,
+                                color: Color(0xFF9E2A2B),
+                              ),
                               Text(data.bedroomAmount.toString()),
                             ],
                           ),
                           Column(children: [
-                            Icon(Icons.bathtub_outlined, color: Color(0xFF9E2A2B),),
+                            Icon(
+                              Icons.bathtub_outlined,
+                              color: Color(0xFF9E2A2B),
+                            ),
                             Text(data.bathroomAmount.toString()),
                           ]),
                           Column(children: [
-                            Icon(Icons.directions_car_outlined, color: Color(0xFF9E2A2B),),
+                            Icon(
+                              Icons.directions_car_outlined,
+                              color: Color(0xFF9E2A2B),
+                            ),
                             Text(data.garageSize.toString()),
                           ]),
                           Column(children: [
-                            Icon(Icons.stairs_outlined, color: Color(0xFF9E2A2B),),
+                            Icon(
+                              Icons.stairs_outlined,
+                              color: Color(0xFF9E2A2B),
+                            ),
                             Text(data.floorAmount.toString()),
                           ]),
                         ],
