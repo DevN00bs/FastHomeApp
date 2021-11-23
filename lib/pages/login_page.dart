@@ -144,7 +144,7 @@ class _LoginForm extends StatelessWidget {
 
                 loginForm.isLoading = true;
 
-                await Future.delayed(Duration( seconds: 2));
+                await Future.delayed(Duration( seconds: 1));
 
                 loginForm.isLoading = false;
 

@@ -14,7 +14,13 @@ import 'package:fast_home/pages/login_page.dart';
 import 'package:fast_home/pages/register_page.dart';
 
 void main() => runApp(MyApp());
+//TODO: al juntar los proyectos checar el card basic con el ontap para details + details
 
+//TODO: login + token
+//TODO: register que te mande a login
+//TODO: token para no volver al inicial; RESTAURAR
+//TODO: terminar filtros cuando acabe back
+//TODO: username + email + reset pass
 class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
