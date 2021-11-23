@@ -70,7 +70,7 @@ textInfo(BuildContext context){
           'Change password',
           style: TextStyle(
             fontSize: 16,
-            color: Colors.indigo[300]
+            color: Color(0xFF335C67)
           ),
           ),
       ),
@@ -82,9 +82,7 @@ textInfo(BuildContext context){
       child: OutlinedButton(
         onPressed: () { 
           print('Log Out');
-          Navigator.pushReplacement(
-          context,
-          MaterialPageRoute(builder: (context) => InitialPage()),);
+          Navigator.pushReplacementNamed(context, 'initial_page');
         },
         child: Text(
           'Log out',

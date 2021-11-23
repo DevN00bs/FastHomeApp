@@ -1,4 +1,5 @@
 import 'dart:ui';
+import 'package:fast_home/services/auth_service.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
@@ -13,7 +14,13 @@ import 'package:fast_home/pages/login_page.dart';
 import 'package:fast_home/pages/register_page.dart';
 
 void main() => runApp(MyApp());
+//TODO: al juntar los proyectos checar el card basic con el ontap para details + details
 
+//TODO: login + token
+//TODO: register que te mande a login
+//TODO: token para no volver al inicial; RESTAURAR
+//TODO: terminar filtros cuando acabe back
+//TODO: username + email + reset pass
 class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
@@ -22,6 +29,10 @@ class MyApp extends StatelessWidget {
         ChangeNotifierProvider(
           create: (_) =>
               new UiProvider(), //(_) when build context is not needed
+        ),
+        ChangeNotifierProvider(
+          create: (_) =>
+              new AuthService(), //to know user status
         ),
       ],
       child: MaterialApp(
@@ -46,6 +57,6 @@ class MyApp extends StatelessWidget {
 
 appTheme() {
   return ThemeData(
-    primaryColor: Colors.indigo[300],
+    primaryColor: Color(0xFF335C67),
   );
 }
