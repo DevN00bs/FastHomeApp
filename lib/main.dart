@@ -1,11 +1,14 @@
 import 'dart:ui';
+import 'package:fast_home/pages/check_auth_screen.dart';
 import 'package:fast_home/services/auth_service.dart';
+import 'package:fast_home/services/services.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
 import 'package:fast_home/services/ui_provider.dart';
 import 'package:fast_home/pages/home_page.dart';
 import 'package:fast_home/pages/initial_page.dart';
+import 'package:fast_home/pages/initial_page_alt.dart';
 import 'package:fast_home/pages/search_page.dart';
 import 'package:fast_home/pages/user_page.dart';
 import 'package:fast_home/pages/pages_page.dart';
@@ -14,11 +17,11 @@ import 'package:fast_home/pages/login_page.dart';
 import 'package:fast_home/pages/register_page.dart';
 
 void main() => runApp(MyApp());
-//TODO: al juntar los proyectos checar el card basic con el ontap para details + details
 
 //TODO: login + token
 //TODO: register que te mande a login
 //TODO: token para no volver al inicial; RESTAURAR
+
 //TODO: terminar filtros cuando acabe back
 //TODO: username + email + reset pass
 class MyApp extends StatelessWidget {
@@ -38,7 +41,7 @@ class MyApp extends StatelessWidget {
       child: MaterialApp(
           debugShowCheckedModeBanner: false,
           title: 'FastHome',
-          initialRoute: 'initial_page',
+          initialRoute: 'checking_page',
           routes: {
             'home_page': (_) => HomePage(),
             'initial_page': (_) => InitialPage(),
@@ -48,8 +51,11 @@ class MyApp extends StatelessWidget {
             'info_page': (_) => DetailPage(),
             'login_page': (_) => LoginPage(),
             'register_page': (_) => RegisterPage(),
+            'checking_page': (_) => CheckAuthPage(),
           },
+          scaffoldMessengerKey: NotificationsService.messengerKey,//not instanced because static
           //TODO: colors here
+          //theme: ThemeData.dark()),
           theme: appTheme()),
     );
   }
@@ -58,5 +64,6 @@ class MyApp extends StatelessWidget {
 appTheme() {
   return ThemeData(
     primaryColor: Color(0xFF335C67),
+    //primaryColor: Colors.white,
   );
 }

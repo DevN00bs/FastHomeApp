@@ -1,6 +1,4 @@
-import 'package:fast_home/pages/pages_page.dart';
-import 'package:fast_home/pages/login_page.dart';
-import 'package:fast_home/pages/register_page.dart';
+import 'package:fast_home/pages/pages_export.dart';
 
 import 'package:flutter/material.dart';
 
@@ -25,97 +23,68 @@ class InitialPage extends StatelessWidget {
               Column(
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
-                  Expanded(
-                    child: Text('')
-                ),
-                Expanded(
-                  child: Text('')
-                ),
+
+                SizedBox( height: 200 ),
+
                 Expanded(
                   child: Image.asset('images/logo-big.png')
                 ),
-                Expanded(
-                  child: Text(
-                    '\n\nWelcome',
-                    style: TextStyle(fontSize: 32, height: .5, fontWeight: FontWeight.w600, color: Color(0xFF335C67)),
-                    
-                    )
-                ),
-                Expanded(
-                  child: Text('')
-                ),
-                Expanded(
-                  child: Text('')
-                ),
-                Row(
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  children: [
-                  Expanded(
-                    child: Text('')
+
+                SizedBox( height: 180 ),
+
+                MaterialButton(
+                  shape: RoundedRectangleBorder( borderRadius: BorderRadius.circular(30) ),
+                  elevation: 0,
+                  color: Color(0xFF335C67),
+                  //splashColor: Color(0xFF335C67),
+                  
+                  //splashColor: Colors.grey,
+                  onLongPress: null,
+                    child: Container(
+                      padding: EdgeInsets.symmetric(horizontal: 35, vertical: 10),
+                      child: Text(
+                      'Log in',
+                      style: TextStyle(color: Colors.white, fontSize: 20, fontWeight: FontWeight.w400)
+                      ),
                     ),
-                  Expanded(
-                    child: ElevatedButton(
-                    onPressed: () { 
-                      print('Log In');
+                  onPressed: () { 
+                    print('Log In');
                       Navigator.pushAndRemoveUntil(
                         context,
                         MaterialPageRoute(builder: (context) => LoginPage()),
-                        (Route<dynamic> route) => false,
+                          (Route<dynamic> route) => false,
                         );
                       }, 
-                    //filled
-                    style: ButtonStyle(
-                      backgroundColor: MaterialStateProperty.all(Color(0xFF335C67)),
-                      textStyle: MaterialStateProperty.all(TextStyle(fontSize: 19))
+                  ),
+
+                SizedBox( height: 20 ),
+                  
+                MaterialButton(
+                  shape: RoundedRectangleBorder( borderRadius: BorderRadius.circular(30), side: BorderSide( color: Color(0xFF335C67), width: 2 ) ),
+                  elevation: 0,
+                  color: Colors.white,
+                  //splashColor: Color(0xFF335C67),
+                  
+                  //splashColor: Color(0xAA335C67),
+                  onLongPress: null,
+                    child: Container(
+                      padding: EdgeInsets.symmetric(horizontal: 30, vertical: 10),
+                      child: Text(
+                      'Sign up',
+                      style: TextStyle(color: Color(0xFF335C67), fontSize: 20, fontWeight: FontWeight.w400)
+                      ),
                     ),
-                    child: Text('Log In'),
-                    )
-                    ),
-                    Expanded(
-                    child: Text('')
-                    ),
-                ]
-                ),
-                Row(
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  children: [
-                  Expanded(
-                    child: Text('')
-                    ),
-                  Expanded(
-                    child: OutlinedButton(
-                      onPressed: () { 
-                      print('Sign Up');
-                      /*
-                      Navigator.push(
-                        context,
-                        MaterialPageRoute(builder: (context) => RegisterPage())
-                        );
-                      }, 
-                      */ 
+                  onPressed: () { 
+                    print('Sign up');
                       Navigator.pushAndRemoveUntil(
                         context,
                         MaterialPageRoute(builder: (context) => RegisterPage()),
-                        (Route<dynamic> route) => false,
+                          (Route<dynamic> route) => false,
                         );
                       }, 
-                    //outlined
-                    style: ButtonStyle(
-                      foregroundColor: MaterialStateProperty.all(Color(0xFF335C67)),
-                      textStyle: MaterialStateProperty.all(TextStyle(fontSize: 19, color: Color(0xFF335C67)))
-                    ),
-                    child: Text('Sign up')
-                    )
-                    ),
-                    Expanded(
-                    child: Text('')
-                    ),
-                    
-                ]
-                ),
-                Expanded(
-                  child: Text('')
-                ),
+                  ),
+                
+                SizedBox( height: 100 )
               ],
             ),
             ]

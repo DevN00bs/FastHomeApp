@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'dart:convert';
 import 'package:http/http.dart' as http;
 
-import 'package:fast_home/pages/detail_page.dart';
+import 'package:fast_home/pages/pages_export.dart';
 import 'package:fast_home/entities/basic_property.dart';
 import 'package:fast_home/entities/card_basic_property.dart';
 

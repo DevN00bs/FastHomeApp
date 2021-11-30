@@ -84,7 +84,7 @@ Widget _filtersListView() {
             alignment: Alignment.topLeft,
             child: Text(
               ' Bedrooms',
-              style: TextStyle(fontSize: 18),
+              style: TextStyle( fontSize: 18, color: Color(0xFF335C67), fontWeight: FontWeight.w600),
             ),
           ),
           Container(
