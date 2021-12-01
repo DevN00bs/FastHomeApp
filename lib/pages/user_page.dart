@@ -1,40 +1,44 @@
-import 'package:fast_home/pages/pages_export.dart';
 import 'package:fast_home/services/services.dart';
 
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
-import 'package:flutter_secure_storage/flutter_secure_storage.dart';
 
 class UserPage extends StatelessWidget {
-
-  
-  
   @override
   Widget build(BuildContext context) {
-
-  
+    final authService = Provider.of<AuthService>(context, listen: false);
+    final group = Future.wait([
+      authService.readUser(),
+      authService.readToken()
+    ]);
 
     return Scaffold(
-        body: Container(
-            child: ListView(
-              padding: EdgeInsets.all(15),
-              children: [
-                SizedBox( height: 20 ),
-                userCard( context ),
-                SizedBox( height: 10 ),
-                textInfo( context )
-              ]
-            )
-          ),
+        body: FutureBuilder(
+          future: group,
+          builder: (context, AsyncSnapshot<List<String>> snapshot) {
+            if (!snapshot.hasData) {
+              return CircularProgressIndicator();
+            }
+
+            return Container(
+                child: ListView(
+                    padding: EdgeInsets.all(15),
+                    children: [
+                      SizedBox( height: 20 ),
+                      userCard(snapshot.data![0]),
+                      SizedBox( height: 10 ),
+                      textInfo( context )
+                    ]
+                )
+            );
+          },
+        ),
       );
   }
 }
 
-userCard( context ) async{
+userCard(String username) {
 
-  final storage = new FlutterSecureStorage();
-
-  final authService = Provider.of<AuthService>(context, listen: false);
 
   return Column(
             children: [
@@ -44,13 +48,7 @@ userCard( context ) async{
               radius: 80,
             ),
             SizedBox( height: 10 ),
-            FutureBuilder<Widget>(
-              future: authService.readUser(),
-              initialData: Text(''),
-              builder: (BuildContext context, AsyncSnapshot<Widget> snapshot) {
-                return snapshot.data!;
-              },
-            ),
+            Text(username),
             Divider(
               thickness: 1,
               height: 35,

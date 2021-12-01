@@ -104,11 +104,9 @@ class AuthService extends ChangeNotifier{
 
   }
 
-   Future<Widget> readUser() async {
+   Future<String> readUser() async {
 
-    return Text(
-      await storage.read(key: 'uname') ?? ''
-    ); //?? then...
+    return await storage.read(key: 'uname') ?? ''; //?? then...
 
   }
   
