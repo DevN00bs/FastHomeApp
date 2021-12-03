@@ -21,6 +21,7 @@ class CustomNavigator extends StatelessWidget {
         ]
       ),
       child: BottomNavigationBar(
+        backgroundColor: Colors.white,
           onTap: ( int i ) => uiProvider.selectedMenuOpt = i,
           currentIndex: currentIndex,
           elevation: 0,

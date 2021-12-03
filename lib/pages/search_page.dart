@@ -17,13 +17,13 @@ class _SearchPageState extends State<SearchPage> {
 
   String searchV = '';
 
-  List<String> _choices = ['1', '2', '3', '4'];
-  List<String> _choices2 = [];
-  List<String> _choices3 = [];
-  List<String> _choices4 = [];
+  List<String> _choices = ['1', '2', '3', '4', '5+'];
+  List<String> _choices2 = ['1', '1.5', '2', '2.5', '3+'];
+  List<String> _choices3 = ['1', '2', '3+'];
+  List<String> _choices4 = ['1', '2', '3+'];
 
-  // Pssst... Es 'bedrooms', no 'Rooms'
-  Map<String, int> searchMap = {'bedrooms': 1, 'Bathrooms': 1, 'Garage': 0, 'Floors': 0};
+  //keys
+  Map<String, int> searchMap = {'bedrooms': 1, 'bathrooms': 0, 'garage': 1, 'floors': 1};
 
   int _hg = 15;
 
@@ -45,9 +45,9 @@ class _SearchPageState extends State<SearchPage> {
     return Scaffold(
         key: _key,
         body: Column(children: [
-          Container(height: 150, child: _filtersListView()),
+          Container(height: 280, child: _filtersListView()),
           Container(
-            height: 450,
+            height: 350,
             child: _cardsFilterBasic(),
           )
         ]));
@@ -79,12 +79,14 @@ class _SearchPageState extends State<SearchPage> {
 Widget _filtersListView() {
   return ListView(
       children: [
-        Column(children: [
+        Column(
+          children: [
+          /////////
           Align(
             alignment: Alignment.topLeft,
             child: Text(
               ' Bedrooms',
-              style: TextStyle(fontSize: 18),
+              style: TextStyle( fontSize: 18, color: Color(0xFF335C67), fontWeight: FontWeight.w600),
             ),
           ),
           Container(
@@ -117,6 +119,122 @@ Widget _filtersListView() {
               },
             ),
           ),
+          /*
+          Align(
+            alignment: Alignment.topLeft,
+            child: Text(
+              ' Bathrooms',
+              style: TextStyle( fontSize: 18, color: Color(0xFF335C67), fontWeight: FontWeight.w600),
+            ),
+          ),
+          Container(
+            height: MediaQuery.of(context).size.height / _hg,
+            child: ListView.builder(
+              scrollDirection: Axis.horizontal,
+              itemCount: _choices2.length,
+              itemBuilder: (BuildContext context, int index) {
+                return Column(
+                    children: [
+                  ChoiceChip(
+                    label: Text(_choices2[index]),
+                    selected: _choiceIndex2 == index,
+                    selectedColor: Colors.grey[300],
+                    onSelected: (bool selected) {
+                      setState(() {
+                        _choiceIndex2 = selected ? index : 0;
+                        
+                        searchMap['bathrooms'] = _choiceIndex2 + 1;
+                      });
+                    },
+                    backgroundColor: Colors.transparent,
+                    shape: StadiumBorder(
+                        side: BorderSide(color: Colors.grey.shade500)),
+                    labelStyle: TextStyle(
+                        color: Colors.grey.shade700,
+                        fontWeight: FontWeight.bold),
+                  ),
+                ]);
+              },
+            ),
+          ),
+          */
+          Align(
+            alignment: Alignment.topLeft,
+            child: Text(
+              ' Garage',
+              style: TextStyle( fontSize: 18, color: Color(0xFF335C67), fontWeight: FontWeight.w600),
+            ),
+          ),
+          Container(
+            height: MediaQuery.of(context).size.height / _hg,
+            child: ListView.builder(
+              scrollDirection: Axis.horizontal,
+              itemCount: _choices3.length,
+              itemBuilder: (BuildContext context, int index) {
+                return Column(
+                    children: [
+                  ChoiceChip(
+                    label: Text(_choices3[index]),
+                    selected: _choiceIndex3 == index,
+                    selectedColor: Colors.grey[300],
+                    onSelected: (bool selected) {
+                      setState(() {
+                        _choiceIndex3 = selected ? index : 0;
+                        
+                        searchMap['garage'] = _choiceIndex3 + 1;
+                      });
+                    },
+                    backgroundColor: Colors.transparent,
+                    shape: StadiumBorder(
+                        side: BorderSide(color: Colors.grey.shade500)),
+                    labelStyle: TextStyle(
+                        color: Colors.grey.shade700,
+                        fontWeight: FontWeight.bold),
+                  ),
+                ]);
+              },
+            ),
+          ),
+          //////
+          Align(
+            alignment: Alignment.topLeft,
+            child: Text(
+              ' Floors',
+              style: TextStyle( fontSize: 18, color: Color(0xFF335C67), fontWeight: FontWeight.w600),
+            ),
+          ),
+          Container(
+            height: MediaQuery.of(context).size.height / _hg,
+            child: ListView.builder(
+              scrollDirection: Axis.horizontal,
+              itemCount: _choices4.length,
+              itemBuilder: (BuildContext context, int index) {
+                return Column(
+                    children: [
+                  ChoiceChip(
+                    label: Text(_choices4[index]),
+                    selected: _choiceIndex4 == index,
+                    selectedColor: Colors.grey[300],
+                    onSelected: (bool selected) {
+                      setState(() {
+                        _choiceIndex4 = selected ? index : 0;
+                        
+                        searchMap['floors'] = _choiceIndex4 + 1;
+                      });
+                    },
+                    backgroundColor: Colors.transparent,
+                    shape: StadiumBorder(
+                        side: BorderSide(color: Colors.grey.shade500)),
+                    labelStyle: TextStyle(
+                        color: Colors.grey.shade700,
+                        fontWeight: FontWeight.bold),
+                  ),
+                ]);
+              },
+            ),
+          ),
+
+
           Container(
             height: 40,
             width: 330,
@@ -137,6 +255,7 @@ Widget _filtersListView() {
               ),
             ),
           ),
+
         ]),
       ],
     );
@@ -148,25 +267,7 @@ Widget _filtersListView() {
 
 //Floors
 
-          /*
-                  Align(
-                    alignment: Alignment.topLeft,
-                    child: Text(' Bathrooms', style: TextStyle( fontSize: 18 ),),
-                  ),
-                  _buildChoiceChips2( ['1', '1.5', '2', '2.5', '3+'], cBathrooms),
 
-                  Align(
-                    alignment: Alignment.topLeft,
-                    child: Text(' Garage', style: TextStyle( fontSize: 18 ),),
-                  ),
-                  _buildChoiceChips3( ['0', '1', '2', '3+'], cGarage ),
-
-                  Align(
-                    alignment: Alignment.topLeft,
-                    child: Text(' Floors', style: TextStyle( fontSize: 18 ),),
-                  ),
-                  _buildChoiceChips4( ['1', '2', '3+'], cFloors ),
-                  */
 
   // Construimos el query con los valores del mapa
   // Y lo actualizamos con el estado para que sea reactivo

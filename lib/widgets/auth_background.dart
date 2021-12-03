@@ -32,7 +32,14 @@ class _HeaderIcon extends StatelessWidget {
       child: Container(
         width: double.infinity,
         margin: EdgeInsets.only( top: 30 ),
-        child: Icon( Icons.person_pin, color: Colors.white, size: 100, )
+        child: Image.asset(
+          'images/loginLogoWhite.png',
+          width: 120,
+          height: 120,
+          )
+        //Icon( Icons.person_pin, color: Colors.white, size: 120, )
+        //login user icon
+        
         //Image.asset('images/loginLogo.png')
       ),
     );
