@@ -1,10 +1,11 @@
 import 'dart:ui';
-import 'package:fast_home/pages/check_auth_screen.dart';
-import 'package:fast_home/services/auth_service.dart';
-import 'package:fast_home/services/services.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
+import 'package:fast_home/pages/check_auth_screen.dart';
+import 'package:fast_home/pages/forgot_pass_page.dart';
+import 'package:fast_home/services/auth_service.dart';
+import 'package:fast_home/services/services.dart';
 import 'package:fast_home/services/ui_provider.dart';
 import 'package:fast_home/pages/home_page.dart';
 import 'package:fast_home/pages/initial_page.dart';
@@ -19,14 +20,9 @@ import 'package:fast_home/pages/register_page.dart';
 void main() => runApp(MyApp());
 
 /*
-
-reiniciar sesión a home
-
-snackbar failed login
-
-(quitar change password)**
-forgot password**
-
+TODO:
+-check login based on sign up info** avec back
+-quitar change password => hacer que jale cuando back lo tenga
  */
 class MyApp extends StatelessWidget {
   @override
@@ -56,6 +52,7 @@ class MyApp extends StatelessWidget {
             'login_page': (_) => LoginPage(),
             'register_page': (_) => RegisterPage(),
             'checking_page': (_) => CheckAuthPage(),
+            'forgot_pass_page': (_) => ForgotPassPage()
           },
           scaffoldMessengerKey: NotificationsService.messengerKey,//not instanced because static
           //TODO: colors here

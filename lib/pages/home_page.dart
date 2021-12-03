@@ -1,14 +1,22 @@
 import 'package:fast_home/entities/basic_property.dart';
 import 'package:fast_home/entities/card_basic_property.dart';
 import 'package:flutter/material.dart';
+/*
+import 'dart:convert';
+import 'package:http/http.dart' as http;
+
+import 'package:fast_home/pages/pages_export.dart';
+import 'package:fast_home/entities/basic_property.dart';
+import 'package:fast_home/entities/card_basic_property.dart';
+*/
 
 class HomePage extends StatelessWidget {
+  
   @override
   Widget build(BuildContext context) {
     return FutureBuilder<List<Basic>>(
       //giving a future; removing future makes it snapshot
-      future: new BasicProperty().fetchBasic(""),
-      // Agrega comillas aquí porque no queremos pasar un query
+      future: new BasicProperty().fetchBasic(""), // ""
       initialData: [],
       builder: (context, snapshot) {
         if (snapshot.connectionState == ConnectionState.waiting) {
