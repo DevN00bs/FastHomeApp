@@ -21,8 +21,7 @@ void main() => runApp(MyApp());
 
 /*
 TODO:
--check login based on sign up info** avec back
--quitar change password => hacer que jale cuando back lo tenga
+-verification email from back
  */
 class MyApp extends StatelessWidget {
   @override
@@ -55,7 +54,7 @@ class MyApp extends StatelessWidget {
             'forgot_pass_page': (_) => ForgotPassPage()
           },
           scaffoldMessengerKey: NotificationsService.messengerKey,//not instanced because static
-          //TODO: colors here
+          //colors here
           //theme: ThemeData.dark()),
           theme: appTheme()),
     );

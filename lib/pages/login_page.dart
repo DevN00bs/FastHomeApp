@@ -34,7 +34,6 @@ class LoginPage extends StatelessWidget {
               ),
 
               SizedBox( height: 30 ),
-              //TODO: endpoint that sends an email of password forgotten
               TextButton(
                 onPressed: () => Navigator.pushReplacementNamed(context, 'forgot_pass_page'),//destroy last pages stack
                 style: ButtonStyle(
@@ -84,7 +83,7 @@ class _LoginForm extends StatelessWidget {
               ), //to bring it from a static one
               onChanged: ( value ) => loginForm.username = value,//keeps username
               validator: ( value ) {
-                //TODO: Set up a search on the db in case username is already taken
+                
                  if ( value != null && value.length >= 4 ) return null; //validation succeeds
                  return 'Username must have at least 4 characters';
 

@@ -171,6 +171,7 @@ class _LoginForm extends StatelessWidget {
                   NotificationsService.showSnackbar( 'Please, verify your account' );
                   
                 } catch (e) {
+                  //TODO: Set up a search on the db in case username is already taken
 
                   print(e);
 
