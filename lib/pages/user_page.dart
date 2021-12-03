@@ -9,7 +9,8 @@ class UserPage extends StatelessWidget {
     final authService = Provider.of<AuthService>(context, listen: false);
     final group = Future.wait([
       authService.readUser(),
-      authService.readToken()
+      //authService.readToken(),
+      authService.mail(),
     ]);
 
     return Scaffold(
@@ -17,7 +18,9 @@ class UserPage extends StatelessWidget {
           future: group,
           builder: (context, AsyncSnapshot<List<String>> snapshot) {
             if (!snapshot.hasData) {
-              return CircularProgressIndicator();
+              return Center(
+                child: CircularProgressIndicator()
+                );
             }
 
             return Container(
@@ -25,9 +28,9 @@ class UserPage extends StatelessWidget {
                     padding: EdgeInsets.all(15),
                     children: [
                       SizedBox( height: 20 ),
-                      userCard(snapshot.data![0]),
+                      userCard( snapshot.data![0] ),
                       SizedBox( height: 10 ),
-                      textInfo( context )
+                      textInfo( context, snapshot.data![1] )
                     ]
                 )
             );
@@ -42,13 +45,29 @@ userCard(String username) {
 
   return Column(
             children: [
+              Container(
+              margin: EdgeInsets.only(right: 10.0),
+              child: CircleAvatar(
+              child: Text(
+                username[0].toUpperCase(),
+                style: TextStyle( fontSize: 80, color: Colors.white ),
+                ),
+              backgroundColor: Color(0xFF335C67),
+              radius: 80,
+              ),
+            ),
+              /*
               CircleAvatar(
               backgroundImage: AssetImage('images/user.png'),
               backgroundColor: Colors.white,
               radius: 80,
-            ),
+              
+            ),*/
             SizedBox( height: 10 ),
-            Text(username),
+            Text(
+              username, 
+              style: TextStyle(fontSize: 25)
+              ),
             Divider(
               thickness: 1,
               height: 35,
@@ -57,7 +76,7 @@ userCard(String username) {
           );
 }
 
-textInfo(BuildContext context){
+textInfo(BuildContext context, String mail){
   
   final authService = Provider.of<AuthService>(context, listen: false);//not redraw
   
@@ -68,7 +87,7 @@ textInfo(BuildContext context){
       SizedBox(
         width: 350,
         child: Text(
-          'Email\nEmailExample.01@mail.com',
+          mail,
           style: TextStyle(
             fontSize: 16
           ),

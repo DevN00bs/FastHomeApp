@@ -11,6 +11,7 @@ class AuthService extends ChangeNotifier{
   final String _loginUrl = 'https://real-state-api.herokuapp.com/api/auth/login';
   //api token check for session REQUIRED
   final storage = new FlutterSecureStorage();
+  final String _emailProfile = 'https://real-state-api.herokuapp.com/api/profile/details';
 
   Future<String?> createUser( String email, String username, String password ) async {
 
@@ -107,6 +108,25 @@ class AuthService extends ChangeNotifier{
    Future<String> readUser() async {
 
     return await storage.read(key: 'uname') ?? ''; //?? then...
+
+  }
+
+  Future<String> mail() async {
+    //url to connect as in postman
+    final url = Uri.parse(_emailProfile);
+    
+    //http ask
+    final resp = await http.get(
+      url, 
+      headers: <String, String>{
+      'Content-Type': 'application/json',
+      'Authorization': await readToken() //to authorize retrieving the email
+    },
+    );
+
+    final Map<String, dynamic> decodedResp = json.decode( resp.body );
+
+    return decodedResp['email'] ?? 'No email available';
 
   }
   
