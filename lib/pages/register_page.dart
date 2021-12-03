@@ -163,6 +163,7 @@ class _LoginForm extends StatelessWidget {
                 //some content of testing by printing on console was removed from here
                 loginForm.isLoading = false;
 
+                //TODO: verification email
                 Navigator.pushReplacementNamed(context, 'login_page');
 
                 NotificationsService.showSnackbar( 'You got an account! Now login' );

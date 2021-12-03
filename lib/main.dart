@@ -1,11 +1,11 @@
 import 'dart:ui';
+import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
+
 import 'package:fast_home/pages/check_auth_screen.dart';
 import 'package:fast_home/pages/forgot_pass_page.dart';
 import 'package:fast_home/services/auth_service.dart';
 import 'package:fast_home/services/services.dart';
-import 'package:flutter/material.dart';
-import 'package:provider/provider.dart';
-
 import 'package:fast_home/services/ui_provider.dart';
 import 'package:fast_home/pages/home_page.dart';
 import 'package:fast_home/pages/initial_page.dart';
@@ -20,8 +20,9 @@ import 'package:fast_home/pages/register_page.dart';
 void main() => runApp(MyApp());
 
 /*
-check login based on sign up info** avec back
-(quitar change password)**hacer que jale cuando back lo tenga
+TODO:
+-check login based on sign up info** avec back
+-quitar change password => hacer que jale cuando back lo tenga
  */
 class MyApp extends StatelessWidget {
   @override
@@ -64,6 +65,7 @@ class MyApp extends StatelessWidget {
 appTheme() {
   return ThemeData(
     primaryColor: Color(0xFF335C67),
+    accentColor: Color(0xFFC8553D)
     //primaryColor: Colors.white,
   );
 }

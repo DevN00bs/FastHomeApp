@@ -121,6 +121,7 @@ textInfo(BuildContext context, String mail){
           await authService.logout();
           print('Log Out');
           Navigator.pushReplacementNamed(context, 'initial_page');
+          //To reset the navbar when the session restarts
             final uiProvider = Provider.of<UiProvider>(context, listen: false);
             uiProvider.selectedMenuOpt = 0;
         },

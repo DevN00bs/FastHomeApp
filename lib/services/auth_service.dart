@@ -14,7 +14,6 @@ class AuthService extends ChangeNotifier{
   final String _emailProfile = 'https://real-state-api.herokuapp.com/api/profile/details';
   //forgot pass
   final String _forgotUrl = 'https://real-state-api.herokuapp.com/api/auth/forgot';
-
   String err = 'Error';
 
   Future<String?> createUser( String email, String username, String password ) async {
@@ -76,7 +75,6 @@ class AuthService extends ChangeNotifier{
     //encode auth data to post
 
     final Map<String, dynamic> decodedResp = json.decode( resp.body );
-
 
     if ( decodedResp.containsKey('token') ) {
 

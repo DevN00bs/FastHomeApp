@@ -148,13 +148,14 @@ class _LoginForm extends StatelessWidget {
                 if ( tkn == null) {
                   
                   Navigator.pushReplacementNamed(context, 'pages_page');
-                  
+
                 } 
                 } catch (e) {
+                //TODO: error messages
                   print(e);
                   NotificationsService.showSnackbar( 'Wrong username or password' );     
                 }
-                
+
               }
             )
 
