@@ -4,8 +4,8 @@
     <package android:name="com.google.android.apps.maps" />
   </queries>
    <application
-        android:label="fast_home"
-        android:icon="@mipmap/ic_launcher">
+        android:label="FastHome"
+        android:icon="@mipmap/launcher_icon">
         <activity
             android:name=".MainActivity"
             android:launchMode="singleTop"
