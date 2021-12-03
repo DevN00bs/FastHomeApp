@@ -68,6 +68,7 @@ class MyApp extends StatelessWidget {
 appTheme() {
   return ThemeData(
     primaryColor: Color(0xFF335C67),
+    accentColor: Color(0xFFC8553D)
     //primaryColor: Colors.white,
   );
 }

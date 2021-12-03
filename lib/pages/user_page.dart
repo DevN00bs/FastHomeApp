@@ -1,9 +1,7 @@
-import 'package:fast_home/pages/pages_export.dart';
 import 'package:fast_home/services/services.dart';
 
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
-import 'package:flutter_secure_storage/flutter_secure_storage.dart';
 
 class UserPage extends StatelessWidget {
   @override
