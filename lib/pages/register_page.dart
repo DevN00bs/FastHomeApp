@@ -1,5 +1,5 @@
 import 'package:fast_home/pages/pages_export.dart';
-import 'package:fast_home/services/auth_service.dart';
+import 'package:fast_home/services/services.dart';
 import 'package:fast_home/services/login_form_provider.dart';
 import 'package:fast_home/ui/input_decorations.dart';
 import 'package:fast_home/widgets/auth_background.dart';
@@ -163,7 +163,10 @@ class _LoginForm extends StatelessWidget {
                 //some content of testing by printing on console was removed from here
                 loginForm.isLoading = false;
 
-                Navigator.pushReplacementNamed(context, 'pages_page');
+                Navigator.pushReplacementNamed(context, 'login_page');
+
+                NotificationsService.showSnackbar( 'You got an account! Now login' );
+
               }
             )
 

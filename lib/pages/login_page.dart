@@ -36,7 +36,7 @@ class LoginPage extends StatelessWidget {
               SizedBox( height: 30 ),
               //TODO: endpoint that sends an email of password forgotten
               TextButton(
-                onPressed: () => Navigator.pushReplacementNamed(context, 'initial_page'),//destroy last pages stack
+                onPressed: () => Navigator.pushReplacementNamed(context, 'forgot_pass_page'),//destroy last pages stack
                 style: ButtonStyle(
                   overlayColor: MaterialStateProperty.all( Color(0xFF335C67).withOpacity( 0.1 ) ),
                   shape: MaterialStateProperty.all( StadiumBorder() )
@@ -143,22 +143,18 @@ class _LoginForm extends StatelessWidget {
 
                 //await Future.delayed(Duration( seconds: 1));
                 //validate login
+                try {
                 final String? tkn = await authService.login(loginForm.username, loginForm.password);
-
                 if ( tkn == null) {
                   
                   Navigator.pushReplacementNamed(context, 'pages_page');
                   
-
-                } else {
-                  //TODO: incorrect mail/pass
-                  //print( tkn );
-                  NotificationsService.showSnackbar('Wrong username or password');          
-
-                  loginForm.isLoading = false;
-
+                } 
+                } catch (e) {
+                  print(e);
+                  NotificationsService.showSnackbar( 'Wrong username or password' );     
                 }
-
+                
               }
             )
 
