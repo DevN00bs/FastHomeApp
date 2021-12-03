@@ -18,12 +18,16 @@ import 'package:fast_home/pages/register_page.dart';
 
 void main() => runApp(MyApp());
 
-//TODO: login + token
-//TODO: register que te mande a login
-//TODO: token para no volver al inicial; RESTAURAR
+/*
 
-//TODO: terminar filtros cuando acabe back
-//TODO: username + email + reset pass
+reiniciar sesión a home
+
+snackbar failed login
+
+(quitar change password)**
+forgot password**
+
+ */
 class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {

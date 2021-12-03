@@ -34,7 +34,6 @@ class PropertyCard extends StatelessWidget {
               child: Padding(
                 padding: const EdgeInsets.all(8.0),
                 child: Container(
-                  height: 134,
                   child: Column(
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     crossAxisAlignment: CrossAxisAlignment.start,
@@ -60,7 +59,7 @@ class PropertyCard extends StatelessWidget {
                         children: [
                           Icon(
                             Icons.person_outline,
-                            color: Color(0xFF9E2A2B),
+                            color: Color(0xFF335C67),
                           ),
                           Text(data.username),
                         ],
@@ -70,7 +69,7 @@ class PropertyCard extends StatelessWidget {
                         children: [
                           Icon(
                             Icons.square_foot_outlined,
-                            color: Color(0xFF9E2A2B),
+                            color: Color(0xFF335C67),
                           ),
                           Text(data.terrainHeight.toString() +
                               " x " +
@@ -86,7 +85,7 @@ class PropertyCard extends StatelessWidget {
                             children: [
                               Icon(
                                 Icons.bed_outlined,
-                                color: Color(0xFF9E2A2B),
+                                color: Color(0xFF335C67),
                               ),
                               Text(data.bedroomAmount.toString()),
                             ],
@@ -94,21 +93,22 @@ class PropertyCard extends StatelessWidget {
                           Column(children: [
                             Icon(
                               Icons.bathtub_outlined,
-                              color: Color(0xFF9E2A2B),
+                              color: Color(0xFF335C67),
                             ),
                             Text(data.bathroomAmount.toString()),
                           ]),
                           Column(children: [
                             Icon(
                               Icons.directions_car_outlined,
-                              color: Color(0xFF9E2A2B),
+                              color: Color(0xFF335C67),
                             ),
                             Text(data.garageSize.toString()),
                           ]),
                           Column(children: [
                             Icon(
                               Icons.stairs_outlined,
-                              color: Color(0xFF9E2A2B),
+                              color: Color(0xFF335C67)
+                              //Color(0xFF9E2A2B),
                             ),
                             Text(data.floorAmount.toString()),
                           ]),

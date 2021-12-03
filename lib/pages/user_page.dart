@@ -6,51 +6,70 @@ import 'package:provider/provider.dart';
 import 'package:flutter_secure_storage/flutter_secure_storage.dart';
 
 class UserPage extends StatelessWidget {
-
-  
-  
   @override
   Widget build(BuildContext context) {
-
-  
+    final authService = Provider.of<AuthService>(context, listen: false);
+    final group = Future.wait([
+      authService.readUser(),
+      //authService.readToken(),
+      authService.mail(),
+    ]);
 
     return Scaffold(
-        body: Container(
-            child: ListView(
-              padding: EdgeInsets.all(15),
-              children: [
-                SizedBox( height: 20 ),
-                userCard( context ),
-                SizedBox( height: 10 ),
-                textInfo( context )
-              ]
-            )
-          ),
+        body: FutureBuilder(
+          future: group,
+          builder: (context, AsyncSnapshot<List<String>> snapshot) {
+            if (!snapshot.hasData) {
+              return Center(
+                child: CircularProgressIndicator()
+                );
+            }
+
+            return Container(
+                child: ListView(
+                    padding: EdgeInsets.all(15),
+                    children: [
+                      SizedBox( height: 20 ),
+                      userCard( snapshot.data![0] ),
+                      SizedBox( height: 10 ),
+                      textInfo( context, snapshot.data![1] )
+                    ]
+                )
+            );
+          },
+        ),
       );
   }
 }
 
-userCard( context ) async{
+userCard(String username) {
 
-  final storage = new FlutterSecureStorage();
-
-  final authService = Provider.of<AuthService>(context, listen: false);
 
   return Column(
             children: [
+              Container(
+              margin: EdgeInsets.only(right: 10.0),
+              child: CircleAvatar(
+              child: Text(
+                username[0].toUpperCase(),
+                style: TextStyle( fontSize: 80, color: Colors.white ),
+                ),
+              backgroundColor: Color(0xFF335C67),
+              radius: 80,
+              ),
+            ),
+              /*
               CircleAvatar(
               backgroundImage: AssetImage('images/user.png'),
               backgroundColor: Colors.white,
               radius: 80,
-            ),
+              
+            ),*/
             SizedBox( height: 10 ),
-            FutureBuilder<Widget>(
-              future: authService.readUser(),
-              initialData: Text(''),
-              builder: (BuildContext context, AsyncSnapshot<Widget> snapshot) {
-                return snapshot.data!;
-              },
-            ),
+            Text(
+              username, 
+              style: TextStyle(fontSize: 25)
+              ),
             Divider(
               thickness: 1,
               height: 35,
@@ -59,7 +78,7 @@ userCard( context ) async{
           );
 }
 
-textInfo(BuildContext context){
+textInfo(BuildContext context, String mail){
   
   final authService = Provider.of<AuthService>(context, listen: false);//not redraw
   
@@ -70,7 +89,7 @@ textInfo(BuildContext context){
       SizedBox(
         width: 350,
         child: Text(
-          'Email\nEmailExample.01@mail.com',
+          mail,
           style: TextStyle(
             fontSize: 16
           ),
