@@ -4,7 +4,6 @@ import 'package:fast_home/pages/detail_page.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/rendering.dart';
 
-
 class PropertyCard extends StatelessWidget {
   const PropertyCard({required this.data, Key? key}) : super(key: key);
 

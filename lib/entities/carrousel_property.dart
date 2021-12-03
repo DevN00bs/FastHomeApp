@@ -3,15 +3,20 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 
-class Carrousel extends StatelessWidget {
-  const Carrousel({Key? key}) : super(key: key);
+import 'package:fast_home/entities/detail_property.dart';
 
-  static const List<String> imageList = [
-    "https://u-storage.com.mx/wp-content/uploads/2019/02/departamento-01.jpg",
-    "https://elcomercio.pe/resizer/02VIzTJ4A2UsfFhDU5Fp-HWFLp4=/980x0/smart/filters:format(jpeg):quality(75)/arc-anglerfish-arc2-prod-elcomercio.s3.amazonaws.com/public/5N6HAL2ZAZBIFN5M4ZPSXC7LOQ.jpg",
-    "https://www.triada.com.pe/noticias/wp-content/uploads/2019/07/triada-aprovechar-espacios-departamento-pequeno.jpg",
-    "https://www.ciudaris.com/blog/wp-content/uploads/requisitos-cumplir-comprar-departamento-lima.jpg",
-  ];
+class Carrousel extends StatelessWidget {
+
+  const Carrousel({Key? key, required this.imageList}) : super(key: key);
+
+  final List<dynamic> imageList;
+
+  // static const List<String> imageList = [
+  //   // "https://u-storage.com.mx/wp-content/uploads/2019/02/departamento-01.jpg",
+  //   // "https://elcomercio.pe/resizer/02VIzTJ4A2UsfFhDU5Fp-HWFLp4=/980x0/smart/filters:format(jpeg):quality(75)/arc-anglerfish-arc2-prod-elcomercio.s3.amazonaws.com/public/5N6HAL2ZAZBIFN5M4ZPSXC7LOQ.jpg",
+  //   // "https://www.triada.com.pe/noticias/wp-content/uploads/2019/07/triada-aprovechar-espacios-departamento-pequeno.jpg",
+  //   // "https://www.ciudaris.com/blog/wp-content/uploads/requisitos-cumplir-comprar-departamento-lima.jpg",
+  // ];
 
   @override
   Widget build(BuildContext context) {
@@ -25,14 +30,16 @@ class Carrousel extends StatelessWidget {
             enableInfiniteScroll: false,
             autoPlay: true,
           ),
-          items: Carrousel.imageList
+          items: imageList
+          //items: Carrousel.imageList
               .map((e) => ClipRRect(
                     borderRadius: BorderRadius.circular(8),
                     child: Stack(
                       fit: StackFit.expand,
                       children: <Widget>[
                         Image.network(
-                          e,
+                          e["url"],
+                          //e,
                           width: 1070,
                           height: 350,
                           fit: BoxFit.cover,
