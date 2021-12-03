@@ -154,6 +154,7 @@ class _LoginForm extends StatelessWidget {
 
                 //the one inside the scope at the beggining of here
                 if( !loginForm.isValidForm() ) return;//do nothing
+
                 loginForm.isLoading = true;
 
                 //await Future.delayed(Duration( seconds: 1));
@@ -163,12 +164,22 @@ class _LoginForm extends StatelessWidget {
                 //some content of testing by printing on console was removed from here
                 loginForm.isLoading = false;
 
-                //TODO: verification email
-                Navigator.pushReplacementNamed(context, 'login_page');
+                try {
 
-                NotificationsService.showSnackbar( 'You got an account! Now login' );
+                  Navigator.pushReplacementNamed(context, 'login_page');
+
+                  NotificationsService.showSnackbar( 'Please, verify your account' );
+                  
+                } catch (e) {
+
+                  print(e);
+
+                  NotificationsService.showSnackbar( 'Tech problems. Try it later' );
+
+                }
 
               }
+                
             )
 
           ],

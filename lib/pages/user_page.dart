@@ -107,7 +107,8 @@ textInfo(BuildContext context, String mail){
           'Change password',
           style: TextStyle(
             fontSize: 16,
-            color: Color(0xFF335C67)
+            color: Colors.grey
+            //Color(0xFF335C67)
           ),
           ),
       ),

@@ -129,7 +129,7 @@ class _LoginForm extends StatelessWidget {
                 } 
                 } catch (e) {
                   print(e);
-                  NotificationsService.showSnackbar( authService.err );   
+                  NotificationsService.showSnackbar( authService.err3 );   
                 }
 
               }

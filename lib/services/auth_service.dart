@@ -14,7 +14,12 @@ class AuthService extends ChangeNotifier{
   final String _emailProfile = 'https://real-state-api.herokuapp.com/api/profile/details';
   //forgot pass
   final String _forgotUrl = 'https://real-state-api.herokuapp.com/api/auth/forgot';
-  String err = 'Error';
+  
+  //String err = 'Error';
+
+  String err2 = 'Error';
+
+  String err3 = 'Error';
 
   Future<String?> createUser( String email, String username, String password ) async {
 
@@ -37,8 +42,29 @@ class AuthService extends ChangeNotifier{
     body: 
     json.encode(authData)
     );//encode auth data to post
+  
+    /*
+    switch (resp.statusCode) {
+      case 201:
+      err = 'Please, verify your account';
+        break;
+
+      case 400:
+      err = 'Existing or invalid data';
+        break;
+
+      case 500:
+      err = 'Tech problems. Try it later';
+        break;
+        
+    }
+    */
 
     final Map<String, dynamic> decodedResp = json.decode( resp.body );
+
+    return decodedResp[''];
+
+    /*
 
     if ( decodedResp.containsKey('token') ) {
       
@@ -49,6 +75,8 @@ class AuthService extends ChangeNotifier{
     } else {
       return 'Error';
     }
+
+    */
 
   }
 
@@ -72,7 +100,17 @@ class AuthService extends ChangeNotifier{
     body: 
     json.encode(authData)
     );
-    //encode auth data to post
+
+    switch (resp.statusCode) {
+      case 401:
+      err2 = 'Wrong username or password';
+        break;
+
+      case 500:
+      err2 = 'Tech problems';
+        break;
+        
+    }
 
     final Map<String, dynamic> decodedResp = json.decode( resp.body );
 
@@ -114,15 +152,15 @@ class AuthService extends ChangeNotifier{
 
     switch (resp.statusCode) {
       case 200:
-      err = 'Check your inbox';
+      err3 = 'Check your inbox';
         break;
 
       case 404:
-      err = 'Email not found';
+      err3 = 'Email not found';
         break;
 
       case 500:
-      err = 'Tech problems';
+      err3 = 'Tech problems';
         break;
         
     }

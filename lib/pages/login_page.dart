@@ -138,11 +138,8 @@ class _LoginForm extends StatelessWidget {
 
                 //the one inside the scope at the beggining of here
                 if( !loginForm.isValidForm() ) return;//do nothing
-                
-                //loginForm.isLoading = true;
 
                 //await Future.delayed(Duration( seconds: 1));
-                //validate login
                 try {
                 final String? tkn = await authService.login(loginForm.username, loginForm.password);
                 if ( tkn == null) {
@@ -151,9 +148,8 @@ class _LoginForm extends StatelessWidget {
 
                 } 
                 } catch (e) {
-                //TODO: error messages
                   print(e);
-                  NotificationsService.showSnackbar( 'Wrong username or password' );     
+                  NotificationsService.showSnackbar( authService.err2 );    
                 }
 
               }
