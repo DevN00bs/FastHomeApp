@@ -36,6 +36,8 @@ class DetailOb {
 }
 
 class Detail {
+  final List<dynamic> photos;
+
   final String address;
   final String description;
 
@@ -60,7 +62,8 @@ class Detail {
   final num longitude;
 
   Detail(
-      {required this.address,
+      {required this.photos,
+      required this.address,
       required this.description,
       required this.username,
       required this.userRating,
@@ -79,6 +82,7 @@ class Detail {
 
   factory Detail.fromJson(Map<String, dynamic> json) {
     return new Detail(
+        photos: json['photos'],
         address: json['address'],
         description: json['description'],
         username: json['username'],
