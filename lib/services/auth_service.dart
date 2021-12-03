@@ -12,6 +12,9 @@ class AuthService extends ChangeNotifier{
   //api token check for session REQUIRED
   final storage = new FlutterSecureStorage();
   final String _emailProfile = 'https://real-state-api.herokuapp.com/api/profile/details';
+  //forgot pass
+  final String _forgotUrl = 'https://real-state-api.herokuapp.com/api/auth/forgot';
+  String err = 'Error';
 
   Future<String?> createUser( String email, String username, String password ) async {
 
@@ -86,6 +89,47 @@ class AuthService extends ChangeNotifier{
       //return decodedResp;
       
     }
+
+  }
+
+  Future<String?> forgot( String email) async {
+
+    //post info to the restapi
+    final Map<String, dynamic> authData = {
+      'email': email
+    };
+
+    //url to connect as in postman
+    final url = Uri.parse(_forgotUrl);
+    
+    //http ask
+    final resp = await http.post(
+      url, 
+      headers: <String, String>{
+      'Content-Type': 'application/json',
+    },
+    body: 
+    json.encode(authData)
+    );
+
+    switch (resp.statusCode) {
+      case 200:
+      err = 'Check your inbox';
+        break;
+
+      case 404:
+      err = 'Email not found';
+        break;
+
+      case 500:
+      err = 'Tech problems';
+        break;
+        
+    }
+
+    final Map<String, dynamic> decodedResp = json.decode( resp.body );
+
+    return decodedResp['email'];
 
   }
 

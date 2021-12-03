@@ -9,7 +9,7 @@ import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:flutter/material.dart';
 
-class RegisterPage extends StatelessWidget {
+class ForgotPassPage extends StatelessWidget {
   //USERNAME EMAIL PASS
 
   @override
@@ -24,9 +24,6 @@ class RegisterPage extends StatelessWidget {
 
                 child: Column(
                   children: [
-                    SizedBox( height: 10 ),
-                    Text('Register', style: Theme.of(context).textTheme.headline4 ),
-                    SizedBox( height: 30 ),
                     ChangeNotifierProvider(
                       create: ( _ ) => LoginFormProvider(), // (_) to ignore the build context
                       child: _LoginForm(),
@@ -42,7 +39,7 @@ class RegisterPage extends StatelessWidget {
                   overlayColor: MaterialStateProperty.all( Color(0xFF335C67).withOpacity( 0.1 ) ),
                   shape: MaterialStateProperty.all( StadiumBorder() )
                 ),
-                child: Text('Already an account? Log in', style: TextStyle( fontSize: 18, color: Colors.black87 )),
+                child: Text('Go to login', style: TextStyle( fontSize: 18, color: Colors.black87 )),
                ),
               SizedBox( height: 50)
             ],
@@ -68,23 +65,9 @@ class _LoginForm extends StatelessWidget {
         child: Column(
           children: [
 
-            TextFormField(
-              autocorrect: false,
-              decoration: InputDecorations.authInputDecoration(
-                hintText: 'MyUser01',
-                labelText: 'Username',
-                prefixIcon: Icons.person_outlined
-              ), //to bring it from a static one
-              onChanged: ( value ) => loginForm.username = value,//keeps username
-              validator: ( value ) {
-                //TODO: Set up a search on the db in case username is already taken
-                 if ( value != null && value.length >= 4 ) return null; //validation succeeds
-                 return 'Username must have at least 4 characters';
-
-              },
-            ),
-
-            SizedBox( height: 30 ),
+           SizedBox( height: 10 ),
+                    Text('Reset\nPassword', style: Theme.of(context).textTheme.headline4, textAlign: TextAlign.center, ),
+                    SizedBox( height: 30 ),
 
             TextFormField(
               autocorrect: false,
@@ -109,26 +92,6 @@ class _LoginForm extends StatelessWidget {
 
             SizedBox( height: 30 ),
 
-            TextFormField(
-              autocorrect: false,
-              obscureText: true,
-              keyboardType: TextInputType.visiblePassword,
-              decoration: InputDecorations.authInputDecoration(
-                hintText: '*****',
-                labelText: 'Password',
-                prefixIcon: Icons.lock_outline
-              ),
-              onChanged: ( value ) => loginForm.password = value,//keeps pass
-              validator: ( value ) {
-
-                 if ( value != null && value.length >= 6 ) return null; //validation succeeds
-                 return 'Password must have at least 6 characters';
-
-              },
-            ),
-
-            SizedBox( height: 30 ),
-
             MaterialButton(
               shape: RoundedRectangleBorder( borderRadius: BorderRadius.circular(30) ),
               disabledColor: Colors.grey,
@@ -139,8 +102,8 @@ class _LoginForm extends StatelessWidget {
                 padding: EdgeInsets.symmetric(horizontal: 70, vertical: 12),
                 child: Text(
                   loginForm.isLoading
-                    ? 'Wait'
-                    : 'Sign up',
+                    ? 'Sent'
+                    : 'Send',
                   style: TextStyle(color: Colors.white, fontSize: 18)
                   ),
               ),
@@ -156,17 +119,18 @@ class _LoginForm extends StatelessWidget {
                 if( !loginForm.isValidForm() ) return;//do nothing
                 loginForm.isLoading = true;
 
-                //await Future.delayed(Duration( seconds: 1));
-                //validate login
-                final String? tkn = await authService.createUser(loginForm.username, loginForm.email, loginForm.password);
+                try {
+                final String? tkn = await authService.forgot(loginForm.email);
+                if ( tkn == null) {
+                  
+                  Navigator.pushReplacementNamed(context, 'login_page');
+                  loginForm.isLoading = false;
 
-                //some content of testing by printing on console was removed from here
-                loginForm.isLoading = false;
-
-                //TODO: verification email
-                Navigator.pushReplacementNamed(context, 'login_page');
-
-                NotificationsService.showSnackbar( 'You got an account! Now login' );
+                } 
+                } catch (e) {
+                  print(e);
+                  NotificationsService.showSnackbar( authService.err );   
+                }
 
               }
             )

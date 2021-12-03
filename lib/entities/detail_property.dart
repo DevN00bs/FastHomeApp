@@ -64,6 +64,7 @@ class Detail {
   Detail(
       {required this.photos,
       required this.address,
+
       required this.description,
       required this.username,
       required this.userRating,

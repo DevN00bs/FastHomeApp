@@ -20,8 +20,8 @@ class LoginFormProvider extends ChangeNotifier {
 
     print(formKey.currentState?.validate());
 
-    print('- $email - $username - $password - ');
-    
+    //print('- $email - $username - $password - ');
+
     return formKey.currentState?.validate() ?? false; //?? stands for else
   }
 

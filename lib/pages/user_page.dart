@@ -1,5 +1,6 @@
 import 'package:fast_home/pages/pages_export.dart';
 import 'package:fast_home/services/services.dart';
+import 'package:fast_home/pages/pages_page.dart';
 
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
@@ -120,6 +121,9 @@ textInfo(BuildContext context, String mail){
           await authService.logout();
           print('Log Out');
           Navigator.pushReplacementNamed(context, 'initial_page');
+          //To reset the navbar when the session restarts
+            final uiProvider = Provider.of<UiProvider>(context, listen: false);
+            uiProvider.selectedMenuOpt = 0;
         },
         child: Text(
           'Log out',

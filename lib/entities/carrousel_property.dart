@@ -1,10 +1,12 @@
 import 'package:carousel_slider/carousel_slider.dart';
-import 'package:fast_home/entities/detail_property.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 
+import 'package:fast_home/entities/detail_property.dart';
+
 class Carrousel extends StatelessWidget {
+
   const Carrousel({Key? key, required this.imageList}) : super(key: key);
 
   final List<dynamic> imageList;
@@ -29,6 +31,7 @@ class Carrousel extends StatelessWidget {
             autoPlay: true,
           ),
           items: imageList
+          //items: Carrousel.imageList
               .map((e) => ClipRRect(
                     borderRadius: BorderRadius.circular(8),
                     child: Stack(
@@ -36,6 +39,7 @@ class Carrousel extends StatelessWidget {
                       children: <Widget>[
                         Image.network(
                           e["url"],
+                          //e,
                           width: 1070,
                           height: 350,
                           fit: BoxFit.cover,

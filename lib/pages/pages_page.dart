@@ -14,6 +14,8 @@ class PagesPage extends StatelessWidget {
           centerTitle: true,
           bottomOpacity: 0.0,
           elevation: 1,
+          //added background color
+          backgroundColor: Theme.of(context).primaryColor,
         /*  
             title: Text(
             'FastHome',
